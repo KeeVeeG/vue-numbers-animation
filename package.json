@@ -1,7 +1,8 @@
 {
   "name": "vue-numbers-animation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Directive to animate changes of numerical property",
+  "license": "MIT",
   "main": "dist/vue-number-animation.ssr.js",
   "browser": "dist/vue-number-animation.esm.js",
   "module": "dist/vue-number-animation.esm.js",
@@ -13,12 +14,18 @@
   "keywords": [
     "vue",
     "transition",
+    "directive",
     "number",
+    "numbers",
     "animation"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/KeeVeeG/vue-number-animation.git"
+    "url": "git://github.com/keeveeg/vue-numbers-animation.git",
+    "directory": "packages/vue-numbers-animation"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "sideEffects": false,
   "scripts": {
