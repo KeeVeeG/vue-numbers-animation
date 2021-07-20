@@ -1,4 +1,4 @@
-import easingsFunctions from "./easingsFunctions";
+import interpolate from 'interpolate-all'
 
 export default {
   inserted(el, binding) {
@@ -9,7 +9,6 @@ export default {
   },
 
   update(el, binding) {
-    let animation = easingsFunctions[binding.arg] || easingsFunctions.linear
     let time = binding.value.time || 1000
     let curTime = time
     let oldVal = binding.oldValue.value || binding.oldValue
@@ -22,10 +21,13 @@ export default {
         let prevDate = curDate
         curDate = new Date().getTime()
         curTime -= curDate - prevDate
-        let percent = animation(1 - curTime / time)
-        let curVal = (1 - percent) * oldVal + percent * newVal
-        el.innerHTML = curVal.toFixed(signs)
-        curTime > 0 ? animate() : el.innerHTML = newVal
+        let alpha = 1 - curTime / time
+        
+        if(alpha < 1){
+          let curVal = interpolate(oldVal, newVal, alpha, binding.arg)
+          el.innerHTML = curVal.toFixed(signs)
+          animate()
+        }else el.innerHTML = newVal
       }, 10)
     }
 

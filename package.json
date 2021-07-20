@@ -1,6 +1,6 @@
 {
   "name": "vue-numbers-animation",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Directive to animate changes of numerical property",
   "license": "MIT",
   "main": "dist/vue-number-animation.ssr.js",
@@ -35,7 +35,9 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
-  "dependencies": {},
+  "dependencies": {
+    "interpolate-all": "^1.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
