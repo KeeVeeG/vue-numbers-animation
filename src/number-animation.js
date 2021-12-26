@@ -2,33 +2,36 @@ import interpolate from 'interpolate-all'
 
 export default {
   inserted(el, binding) {
-    let value = binding.value.value || binding.value
+    const value = binding.value.value || binding.value
     el.innerHTML = value
     if (typeof (value) !== "number")
       throw new Error(`Value must be a Number. Expected ${value} as a ${typeof (value)}`)
   },
 
   update(el, binding) {
-    let time = binding.value.time || 1000
+    const time = binding.value.time || 1000
     let curTime = time
-    let oldVal = binding.oldValue.value || binding.oldValue
-    let newVal = binding.value.value || binding.value
-    let signs = oldVal.toString().split(".").length - 1 ? oldVal.toString().split(".")[1].length : 0
+    const oldVal = binding.oldValue.value || binding.oldValue
+    const newVal = binding.value.value || binding.value
+    const signs = oldVal.toString().split(".").length - 1 ? oldVal.toString().split(".")[1].length : 0
     let curDate = new Date().getTime()
 
-    const animate = () => {
+    const animate = (lastVal) => {
       setTimeout(() => {
-        let prevDate = curDate
+        if (lastVal !== undefined && el.innerHTML != lastVal)
+          return
+        const prevDate = curDate
         curDate = new Date().getTime()
         curTime -= curDate - prevDate
-        let alpha = 1 - curTime / time
-        
-        if(alpha < 1){
-          let curVal = interpolate(oldVal, newVal, alpha, binding.arg)
+        const alpha = 1 - curTime / time
+
+        if (alpha < 1) {
+          const curVal = interpolate(oldVal, newVal, alpha, binding.arg)
           el.innerHTML = curVal.toFixed(signs)
-          animate()
-        }else el.innerHTML = newVal
-      }, 10)
+          animate(curVal.toFixed(signs))
+        } else
+          el.innerHTML = newVal
+      })
     }
 
     animate()

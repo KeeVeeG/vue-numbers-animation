@@ -3,3 +3,4 @@ dist
 node_modules
 .npmrc
 *.tgz
+pnpm-lock.yaml

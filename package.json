@@ -1,6 +1,6 @@
 {
   "name": "vue-numbers-animation",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Directive to animate changes of numerical property",
   "license": "MIT",
   "main": "dist/vue-number-animation.ssr.js",
